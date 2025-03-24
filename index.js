@@ -17,14 +17,21 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Enable CORS for your frontend domain
+// Enable CORS for your frontend domains
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://your-frontend-domain.com'], // Add your frontend URL when deployed
-  credentials: true
+  origin: [
+    'http://localhost:5173',  // Local development
+    'https://solemotive.netlify.app',  // Production frontend
+    'https://www.solemotive.netlify.app'  // Production frontend with www
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+app.use(express.json());
 
 // Suppress deprecation warnings
 mongoose.set('strictQuery', true);
