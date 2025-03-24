@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: solemotive-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false # This will be set manually in Render dashboard
+      - key: PORT
+        value: 8080
