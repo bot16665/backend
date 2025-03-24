@@ -17,12 +17,14 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../dist')));
+// Enable CORS for your frontend domain
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://your-frontend-domain.com'], // Add your frontend URL when deployed
+  credentials: true
+}));
 
 // Suppress deprecation warnings
 mongoose.set('strictQuery', true);
@@ -39,9 +41,9 @@ app.use('/api/payment', paymentRoutes);
 app.use('/api/discounts', discountRoutes);
 app.use('/api/users', userRoutes);
 
-// Catch-all route to return the React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
+// Add a health check endpoint
+app.get('/', (req, res) => {
+  res.json({ status: 'API is running' });
 });
 
 // Error handling middleware
