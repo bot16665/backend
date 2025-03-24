@@ -24,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../dist')));
 
+// Suppress deprecation warnings
+mongoose.set('strictQuery', true);
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('Connected to MongoDB'))
