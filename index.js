@@ -23,8 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({
   origin: [
     'http://localhost:5173',  // Local development
-    'https://solvemotive.netlify.app',  // Production frontend
-    'https://www.solvemotive.netlify.app'  // Production frontend with www
+    'https://solemotive.netlify.app',  // Production frontend
+    'https://www.solemotive.netlify.app'  // Production frontend with www
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
