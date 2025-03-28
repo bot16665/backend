@@ -61,6 +61,23 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Example of a client-side XMLHttpRequest (this would typically be in a separate client-side file)
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://solvemotive-backend.onrender.com/api/products', true);
+xhr.withCredentials = true; // Include credentials
+xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+        const response = JSON.parse(xhr.responseText);
+        console.log(response);
+    } else {
+        console.error('Request failed with status:', xhr.status);
+    }
+};
+xhr.onerror = function() {
+    console.error('Request failed');
+};
+xhr.send();
+
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
