@@ -22,8 +22,8 @@ app.use(express.json());
 
 // Enable CORS for your frontend domains
 app.use(cors({
-  origin: '*', // Temporarily allow all origins for debugging
-  credentials: true,
+  origin: 'https://solemotive.netlify.app', // Replace with your frontend URL
+  credentials: true, // Allow credentials
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   preflightContinue: true
@@ -60,23 +60,6 @@ app.use((err, req, res, next) => {
     error: 'Something went wrong! Please try again later.'
   });
 });
-
-// Example of a client-side XMLHttpRequest (this would typically be in a separate client-side file)
-const xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://solvemotive-backend.onrender.com/api/products', true);
-xhr.withCredentials = true; // Include credentials
-xhr.onload = function() {
-    if (xhr.status >= 200 && xhr.status < 300) {
-        const response = JSON.parse(xhr.responseText);
-        console.log(response);
-    } else {
-        console.error('Request failed with status:', xhr.status);
-    }
-};
-xhr.onerror = function() {
-    console.error('Request failed');
-};
-xhr.send();
 
 // Start server
 const PORT = process.env.PORT || 5000;
